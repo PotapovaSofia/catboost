@@ -17,6 +17,9 @@ addons:
       - libc6-dev
       - python-dev
       - python3-dev
+      - g++-5
+
+before_install: sudo apt-get update -qq
 
 before_script: |
     # `ya` provides it's own compiler toolchains, `CC` and CXX` environment variables will override
@@ -25,6 +28,8 @@ before_script: |
     unset CC
     unset CXX
     pip install webdavclient || sudo pip2 install webdavclient
+    export PYCURL_SSL_LIBRARY=openssl
+    export LDFLAGS=-L/usr/local/opt/openssl/lib;export CPPFLAGS=-I/usr/local/opt/openssl/include;
 
 matrix:
   include:
