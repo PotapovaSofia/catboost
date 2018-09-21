@@ -17,17 +17,6 @@ addons:
       - libc6-dev
       - python-dev
       - python3-dev
-      - g++-5
-
-before_install: 
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      sudo apt-get update -qq ;
-      fi
-
-install:
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      sudo apt-get install -qq g++-5 ;
-      fi
 
 before_script: |
     # `ya` provides it's own compiler toolchains, `CC` and CXX` environment variables will override
@@ -41,11 +30,6 @@ before_script: |
 
 matrix:
   include:
-    - os: linux
-      dist: trusty
-      language: cpp
-      env: CB_BUILD_AGENT='clang-linux-x86_64-release-cuda'
-      script: ~/build/${TRAVIS_REPO_SLUG}/ci/travis/script.sh
     - os: linux
       dist: trusty
       language: python
